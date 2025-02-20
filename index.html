@@ -3,19 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Painting and Color Sensing</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>TurfSmart - Color Sensing AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1, #96c93d);
+            min-height: 100vh;
+            color: white;
+            line-height: 1.6;
+        }
+        nav {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 10;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: background 0.3s, transform 0.3s;
+        }
+        nav a:hover {
+            background: #ffe66d;
+            color: #333;
+            transform: scale(1.1);
+        }
+        .section {
+            padding: 100px 20px;
+            display: none;
+            text-align: center;
+        }
+        .section.active {
+            display: block;
+        }
+        h1 {
+            font-size: 48px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #ffe66d;
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 25px;
+            transition: transform 0.3s;
+        }
+        .cta-button:hover {
+            transform: scale(1.1);
+        }
+        #home {
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.5), rgba(78, 205, 196, 0.5));
+        }
+        #about {
+            background: radial-gradient(circle, rgba(69, 183, 209, 0.5), rgba(150, 201, 61, 0.5));
+        }
+        #contact {
+            background: radial-gradient(circle, rgba(255, 230, 109, 0.5), rgba(255, 107, 107, 0.5));
+        }
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .feature-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            width: 220px;
+            transition: transform 0.3s;
+        }
+        .feature-box:hover {
+            transform: translateY(-10px);
+        }
+        #color-demo {
+            margin: 40px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            max-width: 400px;
+        }
+        #color-output {
+            width: 100px;
+            height: 100px;
+            margin: 20px auto;
+            border-radius: 50%;
+            border: 2px solid white;
+            transition: background 0.5s;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>AI Painting and Color Sensing</h1>
-        <canvas id="paintCanvas" width="800" height="600"></canvas>
-        <div class="color-info">
-            <h2>Color Info</h2>
-            <div id="colorDisplay" class="color-display"></div>
-            <p id="colorValue">Click on the canvas to sense color!</p>
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showSection('home')">Home</a></li>
+            <li><a href="#" onclick="showSection('about')">About Us</a></li>
+            <li><a href="#" onclick="showSection('contact')">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <div id="home" class="section active">
+        <h1>Welcome to TurfSmart</h1>
+        <p>Color Anything, Anytime – Smartly and Waste-Free with our advanced color-sensing AI.</p>
+        <a href="#" class="cta-button">Get Started</a>
+        <div class="features">
+            <div class="feature-box">
+                <h2>Color Sensing</h2>
+                <p>Detects and matches colors instantly.</p>
+            </div>
+            <div class="feature-box">
+                <h2>Efficiency</h2>
+                <p>Applies color with zero wastage.</p>
+            </div>
+            <div class="feature-box">
+                <h2>Versatility</h2>
+                <p>Works on any surface or object.</p>
+            </div>
+        </div>
+        <div id="color-demo">
+            <h2>Try the Color Sensor</h2>
+            <input type="color" id="color-picker" value="#ff6b6b">
+            <div id="color-output" style="background: #ff6b6b;"></div>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <div id="about" class="section">
+        <h1>About TurfSmart</h1>
+        <p>TurfSmart is a revolutionary AI designed to make coloring effortless and sustainable. Our technology uses advanced sensors to detect and apply colors with precision, eliminating waste and maximizing efficiency.</p>
+        <a href="#" class="cta-button">Learn More</a>
+    </div>
+
+    <div id="contact" class="section">
+        <h1>Contact Us</h1>
+        <p>Have questions? Reach out to us!</p>
+        <p>Email: turfsmart@gmail.com</p>
+        <p>Phone:0714570455</p>
+        <a href="#" class="cta-button">Send a Message</a>
+    </div>
+
+    <script>
+        // Show/hide sections
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        // Color picker functionality
+        const colorPicker = document.getElementById('color-picker');
+        const colorOutput = document.getElementById('color-output');
+        colorPicker.addEventListener('input', () => {
+            colorOutput.style.background = colorPicker.value;
+        });
+    </script>
 </body>
 </html>
